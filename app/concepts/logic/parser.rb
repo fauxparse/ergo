@@ -1,20 +1,26 @@
-class Logic::Parser < RLTK::Parser
-  left :AND
-  left :OR
-  left :THEN
+module Logic
+  class Parser < RLTK::Parser
+    left :AND
+    left :OR
+    left :THEN
 
-  production(:expression) do
-    clause("subexpression") { |e| e }
-    clause("NOT subexpression") { |_, e| [:not, e] }
-    clause("expression AND expression") { |e1, _, e2| [e1, :and, e2] }
-    clause("expression OR expression") { |e1, _, e2| [e1, :or, e2] }
-    clause("expression THEN expression") { |e1, _, e2| [e1, :then, e2] }
+    production(:expression) do
+      clause("subexpression")              { |expr| expr }
+      clause("NOT subexpression")          { |_, expr| Not.new(expr) }
+      clause("expression AND expression")  { |lft, _, rgt| And.new(lft, rgt) }
+      clause("expression OR expression")   { |lft, _, rgt| Or.new(lft, rgt) }
+      clause("expression THEN expression") { |lft, _, rgt| Then.new(lft, rgt) }
+    end
+
+    production(:subexpression) do
+      clause("variable") { |expr| expr }
+      clause("LPAREN expression RPAREN") { |_, expr, _| expr }
+    end
+
+    production(:variable) do
+      clause("VAR") { |name| Variable.new(name) }
+    end
+
+    finalize
   end
-
-  production(:subexpression) do
-    clause("VAR") { |e| e.inspect }
-    clause("LPAREN expression RPAREN") { |_, e, _| e }
-  end
-
-  finalize
 end
