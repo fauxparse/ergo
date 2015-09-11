@@ -25,3 +25,6 @@ Style/ClassAndModuleChildren:
 
 Style/MultilineOperationIndentation:
   Enabled: false
+
+Style/AlignParameters:
+  Enabled: false

@@ -19,7 +19,7 @@ class Card
 
   def self.from_symbol(symbol)
     case symbol.to_s
-    when "A"..."D" then Variable.new(symbol)
+    when "A".."D" then Variable.new(symbol)
     when "and", "or", "then" then Operator.new(symbol.to_sym)
     when "(", ")" then Parenthesis.new
     when "ergo" then Therefore.new

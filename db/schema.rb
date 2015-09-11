@@ -11,9 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150911030019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "games", force: :cascade do |t|
+    t.integer  "players_count", default: 0
+    t.integer  "rounds_count",  default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "hands", force: :cascade do |t|
+    t.integer "player_id"
+    t.string  "cards_array", default: [], array: true
+    t.integer "round_id"
+  end
+
+  add_index "hands", ["round_id"], name: "index_hands_on_round_id", using: :btree
+
+  create_table "players", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "position",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "position",        default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "cards_remaining"
+  end
+
+  add_foreign_key "hands", "players", on_delete: :cascade
+  add_foreign_key "hands", "rounds", on_delete: :cascade
+  add_foreign_key "rounds", "games", on_delete: :cascade
 end

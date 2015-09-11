@@ -14,6 +14,8 @@ class Deck
     @cards ||= unshuffled.shuffle(random: generator)
   end
 
+  delegate :[], to: :cards
+
   private
 
   def generator
