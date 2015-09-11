@@ -1,6 +1,9 @@
 class Round < ActiveRecord::Base
   belongs_to :game, inverse_of: :rounds, counter_cache: true
   has_many :hands, inverse_of: :round, dependent: :destroy
+  has_many :premises, inverse_of: :round, dependent: :destroy
+
+  MAX_PREMISES = 4
 
   before_validation :initialize_deck, if: :new_record?
 
@@ -11,6 +14,10 @@ class Round < ActiveRecord::Base
       .rotate(starting_player_number)
   end
 
+  def active_player
+    players[turn_number % players.length]
+  end
+
   def deck
     @deck ||= Deck.new(seed: random_seed)
   end
@@ -18,7 +25,7 @@ class Round < ActiveRecord::Base
   private
 
   def starting_player_number
-    (game_id + id) % game.players_count
+    (game_id + position) % game.players_count
   end
 
   def initialize_deck

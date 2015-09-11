@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911030019) do
+ActiveRecord::Schema.define(version: 20150911040137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20150911030019) do
 
   add_index "hands", ["round_id"], name: "index_hands_on_round_id", using: :btree
 
+  create_table "played_cards", force: :cascade do |t|
+    t.integer  "premise_id"
+    t.integer  "position"
+    t.string   "symbol"
+    t.integer  "rotation",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "played_cards", ["premise_id"], name: "index_played_cards_on_premise_id", using: :btree
+
   create_table "players", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "position",   default: 0
@@ -38,15 +49,25 @@ ActiveRecord::Schema.define(version: 20150911030019) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "premises", force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "position"
+  end
+
+  add_index "premises", ["round_id"], name: "index_premises_on_round_id", using: :btree
+
   create_table "rounds", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "position",        default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "cards_remaining"
+    t.integer  "turn_number",     default: 0
   end
 
   add_foreign_key "hands", "players", on_delete: :cascade
   add_foreign_key "hands", "rounds", on_delete: :cascade
+  add_foreign_key "played_cards", "premises", on_delete: :cascade
+  add_foreign_key "premises", "rounds", on_delete: :cascade
   add_foreign_key "rounds", "games", on_delete: :cascade
 end

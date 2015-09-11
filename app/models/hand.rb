@@ -5,6 +5,7 @@ class Hand < ActiveRecord::Base
   SIZE = 5
 
   scope :for_player, -> (player) { where(player_id: player.id) }
+  scope :for_round, -> (round) { where(round_id: round.id) }
 
   validates :player_id, :round_id,
     presence: { allow_blank: false }

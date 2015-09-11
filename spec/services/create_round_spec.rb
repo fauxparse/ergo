@@ -20,5 +20,9 @@ describe CreateRound do
         expect(hand.cards.all? { |c| c.is_a?(Card) }).to be true
       end
     end
+
+    it "creates four empty premises" do
+      expect(round.premises.count).to eq 4
+    end
   end
 end

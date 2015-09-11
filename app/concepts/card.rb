@@ -17,6 +17,11 @@ class Card
     false
   end
 
+  def rotate(rotation)
+    @rotation = rotation if can_rotate_to?(rotation)
+    self
+  end
+
   def self.from_symbol(symbol)
     case symbol.to_s
     when "A".."D" then Variable.new(symbol)
