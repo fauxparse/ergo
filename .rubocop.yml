@@ -11,9 +11,17 @@ AllCops:
    - 'Rakefile'
    - 'config/application.rb'
    - 'config/environments/*'
+   - 'spec/spec_helper.rb'
+   - 'spec/rails_helper.rb'
 
 Style/Documentation:
   Enabled: false
 
 Style/StringLiterals:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
   Enabled: false
