@@ -26,18 +26,30 @@ class Card
     self
   end
 
+  TRANSLATIONS = {
+    Variable    => "A".."D",
+    Operator    =>
+      [Logic::AND, Logic::OR, Logic::THEN, "and", "or", "then"],
+    Not         => [Logic::NOT, "not"],
+    Parenthesis => ["(", ")", "parenthesis"],
+    Therefore   => [Logic::THEREFORE, "ergo", "therefore"]
+  }
+
   def self.from_symbol(symbol)
-    case symbol.to_s
-    when "A".."D" then Variable.new(symbol)
-    when "and", "or", "then" then Operator.new(symbol.to_sym)
-    when Logic::AND then Operator.new(:and)
-    when Logic::OR then Operator.new(:or)
-    when Logic::NOT then Operator.new(:not)
-    when Logic::THEN then Operator.new(:then)
-    when "(", ")", "parenthesis" then Parenthesis.new
-    when "∴", "ergo" then Therefore.new
+    TRANSLATIONS.each_pair do |klass, strings|
+      return from_class(klass, symbol) if strings.include?(symbol.to_s)
+    end
+
+    const_get(symbol.to_s.camelize).new
+  end
+
+  def self.from_class(klass, symbol)
+    if klass == Parenthesis
+      klass.new.rotate(symbol.to_s == ")" ? 2 : 0)
+    elsif klass == Variable || klass == Operator
+      klass.new(symbol.to_sym)
     else
-      const_get(symbol.to_s.camelize).new
+      klass.new
     end
   end
 end

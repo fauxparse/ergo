@@ -3,18 +3,19 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   RunRailsCops: true
   Exclude:
-   - 'bin/*'
-   - 'db/**/*'
-   - 'vendor/bundle/**/*'
-   - 'Guardfile'
-   - 'Gemfile'
-   - 'Rakefile'
-   - 'config/application.rb'
-   - 'config/environments/*'
-   - 'spec/spec_helper.rb'
-   - 'spec/rails_helper.rb'
-   - 'features/support/env.rb'
-   - 'lib/tasks/cucumber.rake'
+    - 'bin/*'
+    - 'script/*'
+    - 'db/**/*'
+    - 'vendor/bundle/**/*'
+    - 'Guardfile'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config/application.rb'
+    - 'config/environments/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'features/support/env.rb'
+    - 'lib/tasks/cucumber.rake'
 
 Style/Documentation:
   Enabled: false
@@ -33,3 +34,7 @@ Style/AlignParameters:
 
 Style/AlignHash:
   Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - 'features/step_definitions/*'

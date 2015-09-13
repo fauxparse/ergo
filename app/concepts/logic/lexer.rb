@@ -7,7 +7,7 @@ class Logic::Lexer < RLTK::Lexer
   rule(/or/)    { :OR }
   rule(/then/)  { :THEN }
   rule(/\s+/)
-  
+
   rule(/#{Logic::NOT}/)  { :NOT }
   rule(/#{Logic::AND}/)  { :AND }
   rule(/#{Logic::OR}/)   { :OR }

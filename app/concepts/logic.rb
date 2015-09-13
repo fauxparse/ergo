@@ -1,6 +1,7 @@
 module Logic
-  AND  = "•"
-  OR   = "∨"
-  NOT  = "~"
-  THEN = "⊃"
+  AND       = "•"
+  OR        = "∨"
+  NOT       = "~"
+  THEN      = "⊃"
+  THEREFORE = "∴"
 end
