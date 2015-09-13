@@ -3,6 +3,7 @@ module Logic
     left :AND
     left :OR
     left :THEN
+    right :NOT
 
     production(:expression) do
       clause("subexpression")              { |expr| expr }

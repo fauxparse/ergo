@@ -15,11 +15,11 @@ module Logic
     end
 
     def proved?(expression)
-      @expressions.include?(expression)
+      @expressions.include?(parse(expression))
     end
 
     def disproved?(expression)
-      @expressions.include?(expression.negated)
+      @expressions.include?(parse(expression).negated)
     end
 
     def proved
@@ -44,6 +44,7 @@ module Logic
     end
 
     def parse(statement)
+      return statement if statement.is_a?(Expression)
       Logic::Parser.parse(lex(statement))
     end
 
