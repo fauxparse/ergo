@@ -9,4 +9,8 @@ class Player < ActiveRecord::Base
   validates :position,
     presence: { allow_blank: false },
     numericality: { only_integer: true }
+
+  def goal
+    position && Deck::VARIABLES.to_a[position]
+  end
 end

@@ -83,6 +83,6 @@ Feature: Play the example game from the rules
     And Player 1 ends their turn
     Then the board shows "A∨B,~B⊃C,~(C),D"
     And the round is over
-    And Player 1 has 11 points
-    And Player 2 has 0 points
+    And Player 1 has 0 points
+    And Player 2 has 12 points
     And Player 3 has 0 points

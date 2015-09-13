@@ -93,3 +93,7 @@ end
 Then(/^the round is over$/) do
   expect(@round).to be_finished
 end
+
+Then(/^Player (\d+) has (\d+) points$/) do |player, score|
+  expect(player_number(player).score).to eq score.to_i
+end

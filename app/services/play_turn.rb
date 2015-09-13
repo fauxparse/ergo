@@ -14,7 +14,7 @@ class PlayTurn
     round.with_lock do
       clean_slate
       apply_actions
-      valid? && round.save
+      valid? && round.save && maybe_end_round
     end
   end
 
@@ -34,5 +34,14 @@ class PlayTurn
     @turn.moves.map do |move|
       Actions.from_move(round, player, move)
     end
+  end
+
+  def maybe_end_round
+    EndRound.new(round).call if round_should_end?
+    true
+  end
+
+  def round_should_end?
+    round.finished? || round.cards_remaining.zero?
   end
 end
