@@ -10,7 +10,7 @@ describe Logic::Solver::DisjunctiveSyllogism do
   end
 
   context "A ∨ B, ~A" do
-    let(:expressions) { ["A or B", "not A"] }
+    let(:expressions) { ["A ∨ B", "~A"] }
 
     it { is_expected.to prove("B") }
   end

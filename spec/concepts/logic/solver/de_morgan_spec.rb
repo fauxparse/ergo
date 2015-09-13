@@ -10,13 +10,13 @@ describe Logic::Solver::DeMorgan do
   end
 
   context "~(A • B)" do
-    let(:expressions) { ["not (A and B)"] }
+    let(:expressions) { ["~(A • B)"] }
 
-    it { is_expected.to prove("not A or not B") }
+    it { is_expected.to prove("~ A ∨ ~B") }
   end
 
   context "~(A ∨ B)" do
-    let(:expressions) { ["not (A or B)"] }
+    let(:expressions) { ["~(A ∨ B)"] }
 
     it { is_expected.to disprove("A") }
     it { is_expected.to disprove("B") }

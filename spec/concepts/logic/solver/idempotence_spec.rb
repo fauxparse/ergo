@@ -10,13 +10,13 @@ describe Logic::Solver::Idempotence do
   end
 
   context "A • A" do
-    let(:expressions) { ["A and A"] }
+    let(:expressions) { ["A • A"] }
 
     it { is_expected.to prove("A") }
   end
 
   context "A ∨ A" do
-    let(:expressions) { ["A or A"] }
+    let(:expressions) { ["A ∨ A"] }
 
     it { is_expected.to prove("A") }
   end

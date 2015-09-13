@@ -10,7 +10,7 @@ describe Logic::Solver::ModusTollens do
   end
 
   context "A ⊃ B, ~B" do
-    let(:expressions) { ["A then B", "not B"] }
+    let(:expressions) { ["A ⊃ B", "~B"] }
 
     it { is_expected.to disprove("A") }
   end

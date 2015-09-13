@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911040137) do
+ActiveRecord::Schema.define(version: 20150913012014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20150911040137) do
   end
 
   add_index "hands", ["round_id"], name: "index_hands_on_round_id", using: :btree
+
+  create_table "moves", force: :cascade do |t|
+    t.integer "turn_id"
+    t.integer "action"
+    t.string  "card_type"
+    t.text    "options",   default: "{}"
+  end
+
+  add_index "moves", ["turn_id"], name: "index_moves_on_turn_id", using: :btree
 
   create_table "played_cards", force: :cascade do |t|
     t.integer  "premise_id"
@@ -62,12 +71,27 @@ ActiveRecord::Schema.define(version: 20150911040137) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "cards_remaining"
-    t.integer  "turn_number",     default: 0
+    t.integer  "turns_count",     default: 0
+    t.integer  "state",           default: 0
   end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer  "round_id"
+    t.integer  "player_id"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "turns", ["player_id"], name: "index_turns_on_player_id", using: :btree
+  add_index "turns", ["round_id"], name: "index_turns_on_round_id", using: :btree
 
   add_foreign_key "hands", "players", on_delete: :cascade
   add_foreign_key "hands", "rounds", on_delete: :cascade
+  add_foreign_key "moves", "turns", on_delete: :cascade
   add_foreign_key "played_cards", "premises", on_delete: :cascade
   add_foreign_key "premises", "rounds", on_delete: :cascade
   add_foreign_key "rounds", "games", on_delete: :cascade
+  add_foreign_key "turns", "players", on_delete: :cascade
+  add_foreign_key "turns", "rounds", on_delete: :cascade
 end

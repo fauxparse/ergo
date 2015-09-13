@@ -10,13 +10,13 @@ describe Logic::Solver::Absorption do
   end
 
   context "A ∨ (A • B)" do
-    let(:expressions) { ["A or (A and B)"] }
+    let(:expressions) { ["A ∨ (A • B)"] }
 
     it { is_expected.to prove("A") }
   end
 
   context "A • (A ∨ B)" do
-    let(:expressions) { ["A and (A or B)"] }
+    let(:expressions) { ["A • (A ∨ B)"] }
 
     it { is_expected.to prove("A") }
   end

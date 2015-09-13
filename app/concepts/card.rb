@@ -9,6 +9,10 @@ class Card
     self.class.name.demodulize.underscore.to_sym
   end
 
+  def eql?(other)
+    to_sym == other.to_sym
+  end
+
   def behaviour
     self
   end
@@ -26,8 +30,12 @@ class Card
     case symbol.to_s
     when "A".."D" then Variable.new(symbol)
     when "and", "or", "then" then Operator.new(symbol.to_sym)
-    when "(", ")" then Parenthesis.new
-    when "ergo" then Therefore.new
+    when Logic::AND then Operator.new(:and)
+    when Logic::OR then Operator.new(:or)
+    when Logic::NOT then Operator.new(:not)
+    when Logic::THEN then Operator.new(:then)
+    when "(", ")", "parenthesis" then Parenthesis.new
+    when "∴", "ergo" then Therefore.new
     else
       const_get(symbol.to_s.camelize).new
     end

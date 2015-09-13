@@ -2,9 +2,9 @@ class Card::Operator < Card
   attr_reader :operator
 
   OPERATORS = {
-    and: "•",
-    or: "∨",
-    then: "⊃"
+    and:  Logic::AND,
+    or:   Logic::OR,
+    then: Logic::THEN
   }
 
   def initialize(operator, options = {})

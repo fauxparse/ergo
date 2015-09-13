@@ -10,7 +10,7 @@ describe Logic::Solver::SplitAnd do
   end
 
   context "A • B" do
-    let(:expressions) { ["A and B"] }
+    let(:expressions) { ["A • B"] }
 
     it { is_expected.to prove("A") }
     it { is_expected.to prove("B") }

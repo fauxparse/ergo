@@ -3,7 +3,7 @@ module Logic
     child :operand, Expression
 
     def to_s
-      "~(#{operand})"
+      "#{Logic::NOT}(#{operand})"
     end
 
     def eql?(other)

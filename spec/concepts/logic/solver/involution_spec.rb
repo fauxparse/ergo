@@ -10,7 +10,7 @@ describe Logic::Solver::Involution do
   end
 
   context "~(~A)" do
-    let(:expressions) { ["not (not A)"] }
+    let(:expressions) { ["~(~A)"] }
 
     it { is_expected.to prove("A") }
   end

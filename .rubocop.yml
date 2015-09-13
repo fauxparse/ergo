@@ -13,6 +13,8 @@ AllCops:
    - 'config/environments/*'
    - 'spec/spec_helper.rb'
    - 'spec/rails_helper.rb'
+   - 'features/support/env.rb'
+   - 'lib/tasks/cucumber.rake'
 
 Style/Documentation:
   Enabled: false
@@ -27,4 +29,7 @@ Style/MultilineOperationIndentation:
   Enabled: false
 
 Style/AlignParameters:
+  Enabled: false
+
+Style/AlignHash:
   Enabled: false

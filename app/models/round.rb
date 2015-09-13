@@ -1,9 +1,12 @@
 class Round < ActiveRecord::Base
   belongs_to :game, inverse_of: :rounds, counter_cache: true
-  has_many :hands, inverse_of: :round, dependent: :destroy
-  has_many :premises, inverse_of: :round, dependent: :destroy
+  has_many :hands, inverse_of: :round, dependent: :destroy, autosave: true
+  has_many :premises, inverse_of: :round, dependent: :destroy, autosave: true
+  has_many :turns, inverse_of: :round, dependent: :destroy, autosave: true
 
   MAX_PREMISES = 4
+
+  enum state: [:playing, :finished]
 
   before_validation :initialize_deck, if: :new_record?
 
@@ -15,7 +18,7 @@ class Round < ActiveRecord::Base
   end
 
   def active_player
-    players[turn_number % players.length]
+    players[turns.count % players.length]
   end
 
   def deck
@@ -25,7 +28,7 @@ class Round < ActiveRecord::Base
   private
 
   def starting_player_number
-    (game_id + position) % game.players_count
+    (game.starting_player_number + position) % game.players_count
   end
 
   def initialize_deck

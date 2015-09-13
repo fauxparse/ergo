@@ -10,7 +10,7 @@ describe Logic::Solver::ModusPonens do
   end
 
   context "A ⊃ B, A" do
-    let(:expressions) { ["A then B", "A"] }
+    let(:expressions) { ["A ⊃ B", "A"] }
 
     it { is_expected.to prove("B") }
   end

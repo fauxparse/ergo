@@ -10,8 +10,8 @@ describe Logic::Solver::HypotheticalSyllogism do
   end
 
   context "A ⊃ B, B ⊃ C" do
-    let(:expressions) { ["A then B", "B then C"] }
+    let(:expressions) { ["A ⊃ B", "B ⊃ C"] }
 
-    it { is_expected.to prove("A then C") }
+    it { is_expected.to prove("A ⊃ C") }
   end
 end
