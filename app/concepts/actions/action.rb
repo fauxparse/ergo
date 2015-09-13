@@ -10,6 +10,19 @@ module Actions
 
     private
 
+    def premise
+      @premise ||= premise_at_position(premise_position) ||
+        round.premises.build(position: premise_position)
+    end
+
+    def premise_position
+      options[:premise] || 0
+    end
+
+    def premise_at_position(position)
+      round.premises.detect { |premise| premise.position == position }
+    end
+
     def hand
       @hand ||= round.hands.detect { |hand| hand.player == player }
     end

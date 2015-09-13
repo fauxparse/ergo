@@ -8,10 +8,6 @@ module Actions
 
     private
 
-    def premise
-      @premise ||= round.premises[options[:premise] || 0]
-    end
-
     def position
       options[:position]
     end

@@ -8,13 +8,6 @@ module Actions
 
     private
 
-    def premise
-      @premise ||= begin
-        index = options[:premise] || 0
-        round.premises[index] || round.premises.build(position: index)
-      end
-    end
-
     def position
       options[:position] || premise.played_cards.length
     end
