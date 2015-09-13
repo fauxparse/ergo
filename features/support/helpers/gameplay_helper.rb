@@ -29,31 +29,24 @@ module FeatureSupport
       PlayedCard.new(attrs.merge(position: index))
     end
 
-    def insert_card(player, card, options)
-      hand = hand_for(player_number(player))
-      index = index_in_hand(card_named(card), hand)
-      options[:index_in_hand] = index
-      @turn ||= @round.turns.build(player: hand.player)
-      @turn.moves.build(action: :insert, card_type: card, options: options)
-      hand.cards_array[index] = nil
+    def insert_card(player, card, options = {})
+      propose_move(player, :insert, card, options)
     end
 
     def discard(player, card, options = {})
-      hand = hand_for(player_number(player))
-      index = index_in_hand(card_named(card), hand)
-      @turn ||= @round.turns.build(player: hand.player)
-      options[:index_in_hand] = index
-      @turn.moves.build(action: :discard, card_type: card, options: options)
-      hand.cards_array[index] = nil
+      propose_move(player, :discard, card, options)
     end
 
     def play_card(player, card, options = {})
+      propose_move(player, :play, card, options)
+    end
+
+    def propose_move(player, action, card, options)
       hand = hand_for(player_number(player))
       index = index_in_hand(card_named(card), hand)
-      options[:index_in_hand] = index
       @turn ||= @round.turns.build(player: hand.player)
-      @turn.moves.build(action: :play, card_type: card, options: options)
-      hand.cards_array[index] = nil
+      options[:index_in_hand] = index
+      ProposeMove.new(@turn, action, card, options).call
     end
   end
 end
