@@ -1,4 +1,4 @@
-class RowPresenter
+class PremisePresenter
   attr_reader :premise
 
   def initialize(premise)

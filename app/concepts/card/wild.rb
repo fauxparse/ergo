@@ -7,6 +7,8 @@ class Card::Wild < Card
     (0..3).include?(rotation)
   end
 
+  delegate :to_s, to: :acting_as
+
   private
 
   def acting_as

@@ -42,7 +42,7 @@ class ScoreRound
   end
 
   def statement(premise)
-    RowPresenter.new(premise).to_s
+    PremisePresenter.new(premise).to_s
   end
 
   def player_score(player)

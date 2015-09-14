@@ -89,7 +89,7 @@ When(/^Player (\d+) ends their turn$/) do |player|
 end
 
 Then(/^the board shows "(.*?)"$/) do |string|
-  board = BoardPresenter.new(@round)
+  board = ProofPresenter.new(@round)
   expect(board.to_s.split).to include(string)
 end
 
