@@ -44,7 +44,6 @@ module FeatureSupport
     def propose_move(player, action, card, options)
       hand = hand_for(player_number(player))
       index = index_in_hand(card_named(card), hand)
-      @turn ||= @round.turns.build(player: hand.player)
       options[:index_in_hand] = index
       ProposeMove.new(@turn, action, card, options).call
     end

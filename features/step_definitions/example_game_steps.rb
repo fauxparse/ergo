@@ -26,6 +26,9 @@ end
 Then(/^it is Player (\d+)’s turn$/) do |player|
   allow(@round).to receive(:active_player)
     .and_return(@round.players[player.to_i - 1])
+  begin_turn = BeginTurn.new(@round)
+  begin_turn.call
+  @turn = begin_turn.turn
 end
 
 Given(/^a new round starts$/) do
