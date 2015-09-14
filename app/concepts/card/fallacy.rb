@@ -1,2 +1,2 @@
-class Card::Fallacy < Card
+class Card::Fallacy < Card::Effect
 end

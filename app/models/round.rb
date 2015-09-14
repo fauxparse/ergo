@@ -3,6 +3,8 @@ class Round < ActiveRecord::Base
   has_many :hands, inverse_of: :round, dependent: :destroy, autosave: true
   has_many :premises, inverse_of: :round, dependent: :destroy, autosave: true
   has_many :turns, inverse_of: :round, dependent: :destroy, autosave: true
+  has_many :effect_cards, inverse_of: :round, dependent: :destroy,
+    autosave: true
 
   MAX_PREMISES = 4
 

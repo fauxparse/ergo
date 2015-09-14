@@ -23,6 +23,7 @@ class PlayTurn
   def clean_slate
     round.hands.reload
     round.premises.reload
+    round.effect_cards.reload
     round.turns << turn
   end
 

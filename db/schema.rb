@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913222911) do
+ActiveRecord::Schema.define(version: 20150914041212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "effect_cards", force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "player_id"
+    t.integer "target_id"
+    t.integer "played_in_turn"
+    t.string  "symbol"
+    t.integer "rotation",       default: 0
+  end
+
+  add_index "effect_cards", ["player_id"], name: "index_effect_cards_on_player_id", using: :btree
+  add_index "effect_cards", ["round_id"], name: "index_effect_cards_on_round_id", using: :btree
+  add_index "effect_cards", ["target_id"], name: "index_effect_cards_on_target_id", using: :btree
 
   create_table "games", force: :cascade do |t|
     t.integer  "players_count", default: 0
@@ -87,6 +100,9 @@ ActiveRecord::Schema.define(version: 20150913222911) do
   add_index "turns", ["player_id"], name: "index_turns_on_player_id", using: :btree
   add_index "turns", ["round_id"], name: "index_turns_on_round_id", using: :btree
 
+  add_foreign_key "effect_cards", "players", column: "target_id", on_delete: :cascade
+  add_foreign_key "effect_cards", "players", on_delete: :cascade
+  add_foreign_key "effect_cards", "rounds", on_delete: :cascade
   add_foreign_key "hands", "players", on_delete: :cascade
   add_foreign_key "hands", "rounds", on_delete: :cascade
   add_foreign_key "moves", "turns", on_delete: :cascade

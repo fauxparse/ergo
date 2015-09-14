@@ -72,8 +72,12 @@ When(/^Player (\d+) plays a tabula rasa on position (\d+) of premise (\d+)$/) do
   play_card(player, :tabula_rasa, options)
 end
 
-When(/^Player (\d+) plays a fallacy on Player (\d+)$/) do |_, _|
-  pending # express the regexp above with the code you wish you had
+When(/^Player (\d+) plays a fallacy on Player (\d+)$/) do |player, target|
+  options = {
+    player: player_number(player),
+    target: player_number(target)
+  }
+  play_card(player, :fallacy, options)
 end
 
 When(/^Player (\d+) plays an ergo$/) do |player|
