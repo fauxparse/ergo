@@ -1,4 +1,4 @@
-class Card::Parenthesis < Card
+class Card::Parenthesis < Card::ProofComponent
   def to_sym
     @rotation == 2 && :")" || :"("
   end

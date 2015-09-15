@@ -1,4 +1,4 @@
-class Card::Operator < Card
+class Card::Operator < Card::ProofComponent
   attr_reader :operator
 
   OPERATORS = {

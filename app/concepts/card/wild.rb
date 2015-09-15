@@ -1,4 +1,4 @@
-class Card::Wild < Card
+class Card::Wild < Card::ProofComponent
   def behaviour
     Card.from_symbol(acting_as)
   end

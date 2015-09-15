@@ -1,4 +1,4 @@
-class Card::Therefore < Card::Effect
+class Card::Therefore < Card
   def to_sym
     :ergo
   end

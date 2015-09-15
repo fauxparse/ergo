@@ -38,3 +38,6 @@ Style/AlignHash:
 Metrics/LineLength:
   Exclude:
     - 'features/step_definitions/*'
+
+Lint/UnusedMethodArgument:
+  Enabled: false

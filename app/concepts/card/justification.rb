@@ -1,2 +1,2 @@
-class Card::Justification < Card::Effect
+class Card::Justification < Card
 end

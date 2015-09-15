@@ -1,4 +1,4 @@
-class Card::Fallacy < Card::Effect
+class Card::Fallacy < Card
   def play(turn, player, options)
     turn.round.effect_cards.build(
       player: player,

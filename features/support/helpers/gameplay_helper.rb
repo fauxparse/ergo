@@ -30,7 +30,7 @@ module FeatureSupport
     end
 
     def insert_card(player, card, options = {})
-      propose_move(player, :insert, card, options)
+      propose_move(player, :play, card, options)
     end
 
     def discard(player, card, options = {})

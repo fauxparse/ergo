@@ -1,4 +1,4 @@
-class Card::Variable < Card
+class Card::Variable < Card::ProofComponent
   attr_reader :variable
 
   def initialize(variable, options = {})
