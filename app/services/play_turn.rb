@@ -1,9 +1,7 @@
 class PlayTurn
-  include ActiveModel::Validations
-
   attr_reader :turn, :round
 
-  delegate :player, to: :turn
+  delegate :player, :valid?, :errors, to: :turn
 
   def initialize(round, turn)
     @round = round

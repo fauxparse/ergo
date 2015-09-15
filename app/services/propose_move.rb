@@ -1,17 +1,17 @@
 class ProposeMove
   attr_reader :turn, :move, :options
 
-  def initialize(turn, action, card, options = {})
+  def initialize(turn, action, options = {})
     @turn = turn
     @action = action
-    @card = card
     @options = options.with_indifferent_access
+    @card = turn.hand.cards[options[:index_in_hand]]
   end
 
   def call
     @move = @turn.moves.build(
       action: @action,
-      card_type: @card,
+      card_type: @card.to_sym,
       options: @options
     )
     hand.cards_array[index_in_hand] = nil if index_in_hand.present?

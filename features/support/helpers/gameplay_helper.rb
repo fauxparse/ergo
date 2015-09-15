@@ -45,7 +45,7 @@ module FeatureSupport
       hand = hand_for(player_number(player))
       index = index_in_hand(card_named(card), hand)
       options[:index_in_hand] = index
-      ProposeMove.new(@turn, action, card, options).call
+      ProposeMove.new(@turn, action, options).call
     end
   end
 end

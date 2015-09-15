@@ -7,6 +7,11 @@ class Turn < ActiveRecord::Base
 
   validates :round_id, :player_id,
     presence: { allow_blank: false }
+  validates_with TurnValidator
+
+  def hand
+    round.hands.detect { |hand| hand.player_id == player_id }
+  end
 
   private
 
