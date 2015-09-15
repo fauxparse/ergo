@@ -46,18 +46,21 @@ Feature: Play the example game from the rules
     And Player 1 discards an A
     And Player 1 ends their turn
     Then the proof shows "A∨B,~B⊃C,(~C)"
+    And there is a fallacy in front of Player 2
 
     Given Player 2 draws an A and a B
     When Player 2 discards an A
     And Player 2 discards a B
     And Player 2 ends their turn
     Then the proof shows "A∨B,~B⊃C,(~C)"
+    And there is a fallacy in front of Player 2
 
     Given Player 3 draws a not and a D
     When Player 3 plays a not at position 1 of premise 3
     And Player 3 plays a D at position 1 of premise 4
     And Player 3 ends their turn
     Then the proof shows "A∨B,~B⊃C,~(~C),D"
+    And there is a fallacy in front of Player 2
 
     Given Player 1 draws a tabula rasa and an ergo
     When Player 1 plays a tabula rasa on position 3 of premise 3

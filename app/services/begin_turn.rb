@@ -7,6 +7,7 @@ class BeginTurn
 
   def call
     @turn = round.turns.build(player: player, position: round.turns.count)
+    round.effect_cards.each { |effect| effect.beginning_of_turn(@turn) }
   end
 
   private

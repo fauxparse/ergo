@@ -33,7 +33,7 @@ class PlayTurn
 
   def actions
     @turn.moves.map do |move|
-      Actions.from_move(round, player, move)
+      Actions.from_move(@turn, player, move)
     end
   end
 

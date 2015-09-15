@@ -7,28 +7,9 @@ Given(/^a (\d+)-player game$/) do |n|
   step "a new round starts"
 end
 
-Given(/^the board shows "(.*)" from the previous turn$/) do |state|
-  step "a 3-player game"
-  @round.premises = state.split(",").map.with_index do |row, position|
-    played_cards = row.chars.map.with_index do |c, i|
-      played_card_from_display_char(c, i)
-    end
-    Premise.new(played_cards: played_cards, position: position)
-  end
-  @round.save
-end
-
 Given(/^Player (\d+) is the first player$/) do |player|
   allow(@game).to receive(:starting_player_number)
     .and_return(player.to_i - 1)
-end
-
-Then(/^it is Player (\d+)’s turn$/) do |player|
-  allow(@round).to receive(:active_player)
-    .and_return(@round.players[player.to_i - 1])
-  begin_turn = BeginTurn.new(@round)
-  begin_turn.call
-  @turn = begin_turn.turn
 end
 
 Given(/^a new round starts$/) do
@@ -92,6 +73,14 @@ When(/^Player (\d+) ends their turn$/) do |player|
   @turn = nil
 end
 
+Then(/^it is Player (\d+)’s turn$/) do |player|
+  allow(@round).to receive(:active_player)
+    .and_return(@round.players[player.to_i - 1])
+  begin_turn = BeginTurn.new(@round)
+  begin_turn.call
+  @turn = begin_turn.turn
+end
+
 Then(/^the proof shows "(.*?)"$/) do |string|
   proof = ProofPresenter.new(@round)
   expect(proof.to_s).to eq(string)
@@ -103,4 +92,10 @@ end
 
 Then(/^Player (\d+) has (\d+) points$/) do |player, score|
   expect(player_number(player).score).to eq score.to_i
+end
+
+Then(/^there is a (.*) in front of Player (\d+)$/) do |card, player|
+  player = player_number(player)
+  effect = @round.effect_cards.where(symbol: card, target_id: player.id).first
+  expect(effect).not_to be_nil
 end

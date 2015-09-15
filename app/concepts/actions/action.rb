@@ -1,9 +1,11 @@
 module Actions
   class Action
-    attr_reader :round, :player, :options
+    attr_reader :turn, :player, :options
 
-    def initialize(round, player, options = {})
-      @round = round
+    delegate :round, to: :turn
+
+    def initialize(turn, player, options = {})
+      @turn = turn
       @player = player
       @options = options.symbolize_keys
     end

@@ -32,7 +32,8 @@ class Card
       [Logic::AND, Logic::OR, Logic::THEN, "and", "or", "then"],
     Not         => [Logic::NOT, "not"],
     Parenthesis => ["(", ")", "parenthesis"],
-    Therefore   => [Logic::THEREFORE, "ergo", "therefore"]
+    Therefore   => [Logic::THEREFORE, "ergo", "therefore"],
+    TabulaRasa  => ["tabula rasa"]
   }
 
   def self.from_symbol(symbol)

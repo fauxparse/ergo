@@ -6,4 +6,8 @@ class EffectCard < ActiveRecord::Base
   def card
     Card.from_symbol(symbol.to_sym).rotate(rotation)
   end
+
+  def beginning_of_turn(turn)
+    card.beginning_of_turn(turn, self)
+  end
 end
