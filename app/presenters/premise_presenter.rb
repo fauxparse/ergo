@@ -12,8 +12,11 @@ class PremisePresenter
   private
 
   def cards
-    premise.played_cards.sort_by(&:position).map do |played|
-      Card.from_symbol(played.symbol).rotate(played.rotation)
-    end
+    premise.played_cards
+      .reject(&:marked_for_destruction?)
+      .sort_by(&:position)
+      .map do |played|
+        Card.from_symbol(played.symbol).rotate(played.rotation)
+      end
   end
 end

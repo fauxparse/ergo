@@ -16,9 +16,11 @@ module Actions
     end
 
     def effect_class
-      action = EFFECTS[options[:card_type]] ||
-        options[:card_type].to_s.capitalize
       Actions.const_get(action)
+    end
+
+    def action
+      EFFECTS[options[:card_type]] || options[:card_type].to_s.capitalize
     end
   end
 end

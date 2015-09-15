@@ -74,8 +74,8 @@ end
 
 When(/^Player (\d+) plays a fallacy on Player (\d+)$/) do |player, target|
   options = {
-    player: player_number(player),
-    target: player_number(target)
+    player_id: player_number(player).id,
+    target_id: player_number(target).id
   }
   play_card(player, :fallacy, options)
 end
@@ -92,9 +92,9 @@ When(/^Player (\d+) ends their turn$/) do |player|
   @turn = nil
 end
 
-Then(/^the board shows "(.*?)"$/) do |string|
-  board = ProofPresenter.new(@round)
-  expect(board.to_s.split).to include(string)
+Then(/^the proof shows "(.*?)"$/) do |string|
+  proof = ProofPresenter.new(@round)
+  expect(proof.to_s).to eq(string)
 end
 
 Then(/^the round is over$/) do

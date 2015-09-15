@@ -18,7 +18,9 @@ module Actions
     end
 
     def destroy_card
-      premise.played_cards[position].mark_for_destruction
+      premise
+        .played_cards.detect { |card| card.position == position }
+        .mark_for_destruction
     end
   end
 end
