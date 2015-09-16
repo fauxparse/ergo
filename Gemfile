@@ -23,6 +23,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rltk'
 
+# OAuth2 login
+gem 'dotenv-rails'
+gem 'figaro'
+gem 'omniauth-google-oauth2'
+gem 'activerecord-session_store'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
