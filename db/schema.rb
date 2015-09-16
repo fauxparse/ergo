@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914041212) do
+ActiveRecord::Schema.define(version: 20150916040312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,16 @@ ActiveRecord::Schema.define(version: 20150914041212) do
     t.integer  "state",           default: 0
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
   create_table "turns", force: :cascade do |t|
     t.integer  "round_id"
     t.integer  "player_id"
@@ -99,6 +109,19 @@ ActiveRecord::Schema.define(version: 20150914041212) do
 
   add_index "turns", ["player_id"], name: "index_turns_on_player_id", using: :btree
   add_index "turns", ["round_id"], name: "index_turns_on_round_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "avatar"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "refresh_token"
+    t.string   "access_token"
+    t.datetime "expires_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   add_foreign_key "effect_cards", "players", column: "target_id", on_delete: :cascade
   add_foreign_key "effect_cards", "players", on_delete: :cascade
