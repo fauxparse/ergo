@@ -9,7 +9,9 @@ module FeatureSupport
     end
 
     def card_named(name)
-      Card.from_symbol(name.to_s.tr(" ", "_"))
+      name = name.to_s.tr(" ", "_")
+      name.downcase! unless name.length == 1
+      Card.from_symbol(name)
     end
 
     def index_in_hand(card, hand)

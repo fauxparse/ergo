@@ -45,7 +45,7 @@ When(/^Player (\d+) discards an? (.*)$/) do |player, card|
   discard(player, card)
 end
 
-When(/^Player (\d+) plays a tabula rasa on position (\d+) of premise (\d+)$/) do |player, position, premise|
+When(/^Player (\d+) plays a Tabula Rasa on position (\d+) of premise (\d+)$/) do |player, position, premise|
   options = {
     premise: premise.to_i - 1,
     position: position.to_i - 1
@@ -53,7 +53,7 @@ When(/^Player (\d+) plays a tabula rasa on position (\d+) of premise (\d+)$/) do
   play_card(player, :tabula_rasa, options)
 end
 
-When(/^Player (\d+) plays a fallacy on Player (\d+)$/) do |player, target|
+When(/^Player (\d+) plays a Fallacy on Player (\d+)$/) do |player, target|
   options = {
     player_id: player_number(player).id,
     target_id: player_number(target).id
@@ -61,7 +61,7 @@ When(/^Player (\d+) plays a fallacy on Player (\d+)$/) do |player, target|
   play_card(player, :fallacy, options)
 end
 
-When(/^Player (\d+) plays an ergo$/) do |player|
+When(/^Player (\d+) plays an Ergo$/) do |player|
   play_card(player, :ergo)
 end
 
@@ -96,6 +96,7 @@ end
 
 Then(/^there is a (.*) in front of Player (\d+)$/) do |card, player|
   player = player_number(player)
+  card.downcase!
   effect = @round.effect_cards.where(symbol: card, target_id: player.id).first
   expect(effect).not_to be_nil
 end
