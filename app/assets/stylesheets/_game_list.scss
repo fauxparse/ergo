@@ -1,0 +1,60 @@
+.game-list {
+  border-top: $base-border;
+
+  .games {
+    margin: 0 0 1rem;
+  }
+
+  .games:empty {
+    height: 3rem;
+    padding: 0.5rem 0;
+    text-align: center;
+    border-bottom: $base-border;
+
+    &::before {
+      content: "(no open games)";
+      color: $light-gray;
+      display: block;
+      line-height: 2rem;
+      vertical-align: middle;
+    }
+  }
+
+  .game {
+    @include display(flex);
+    padding: 0.5rem 0;
+    border-bottom: $base-border;
+
+    .name {
+      @include flex(1);
+      text-transform: capitalize;
+      font-size: 1.25rem;
+      line-height: 2rem;
+    }
+
+    .players {
+      @include display(flex);
+
+      li {
+        margin-left: 0.5rem;
+
+        img {
+          display: block;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+        }
+
+        &.join a {
+          display: block;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.125rem;
+          border: 0.125rem solid green;
+          color: green;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

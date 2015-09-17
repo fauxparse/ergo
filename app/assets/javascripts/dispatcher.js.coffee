@@ -1,1 +1,1 @@
-@dispatcher = new WebSocketRails("#{location.host}/websocket")
+Ergo.dispatcher = new WebSocketRails("#{location.host}/websocket")

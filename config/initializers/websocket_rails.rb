@@ -1,5 +1,4 @@
 WebsocketRails.setup do |config|
-
   # Uncomment to override the default log level. The log level can be
   # any of the standard Logger log levels. By default it will mirror the
   # current Rails environment log level.
@@ -37,11 +36,11 @@ WebsocketRails.setup do |config|
   # config.keep_subscribers_when_private = false
 
   # Set to true if you wish to broadcast channel subscriber_join and
-  # subscriber_part events. All subscribers of a channel will be 
+  # subscriber_part events. All subscribers of a channel will be
   # notified when other clients join and part the channel. If you are
   # using the UserManager, the current_user object will be sent along
   # with the event.
-  # config.broadcast_subscriber_events = true
+  config.broadcast_subscriber_events = true
 
   # Used as the key for the WebsocketRails.users Hash. This method
   # will be called on the `current_user` object in your controller
@@ -59,5 +58,4 @@ WebsocketRails.setup do |config|
   # requires CORS to be enabled for GET "/websocket" request.
   # List here the origin domains allowed to perform the request.
   # config.allowed_origins = ['http://localhost:3000']
-
 end

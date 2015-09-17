@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user.present?
   end
+
+  def find_game(id)
+    @game = Game.find(PleasantLawyer.convert(id.tr("-", " ")))
+  end
 end

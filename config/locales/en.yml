@@ -4,3 +4,11 @@ en:
       too_many_cards_in_hand: "Player %{player} has too many cards in their hand"
       wrong_number_of_moves: "A turn consists of exactly two moves"
       malformed_premise: "Premise %{premise} is incorrectly formed"
+      could_not_join_game: "Could not join game"
+
+  games:
+    index:
+      title: "Open games"
+      new: "New game"
+    create:
+      failure: "Could not create game"

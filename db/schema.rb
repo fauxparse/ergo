@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916040312) do
+ActiveRecord::Schema.define(version: 20150916195726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,10 @@ ActiveRecord::Schema.define(version: 20150916040312) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "score",      default: 0
+    t.integer  "user_id"
   end
+
+  add_index "players", ["user_id"], name: "index_players_on_user_id", using: :btree
 
   create_table "premises", force: :cascade do |t|
     t.integer "round_id"
@@ -130,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150916040312) do
   add_foreign_key "hands", "rounds", on_delete: :cascade
   add_foreign_key "moves", "turns", on_delete: :cascade
   add_foreign_key "played_cards", "premises", on_delete: :cascade
+  add_foreign_key "players", "users", on_delete: :cascade
   add_foreign_key "premises", "rounds", on_delete: :cascade
   add_foreign_key "rounds", "games", on_delete: :cascade
   add_foreign_key "turns", "players", on_delete: :cascade

@@ -22,17 +22,22 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'haml-rails'
+gem 'bourbon'
+gem 'neat'
 
 gem 'rltk'
 
 gem 'websocket-rails'
-gem 'react-rails'
 
 # OAuth2 login
 gem 'dotenv-rails'
 gem 'figaro'
 gem 'omniauth-google-oauth2'
 gem 'activerecord-session_store'
+
+gem 'pleasant-lawyer'
+
+gem 'active_model_serializers', '0.10.0.rc3', github: 'rails-api/active_model_serializers'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
