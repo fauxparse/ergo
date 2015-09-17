@@ -25,6 +25,8 @@ gem 'haml-rails'
 gem 'bourbon'
 gem 'neat'
 
+gem 'mithril_rails'
+
 gem 'rltk'
 
 gem 'websocket-rails'

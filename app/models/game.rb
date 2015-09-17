@@ -17,6 +17,10 @@ class Game < ActiveRecord::Base
   end
 
   def channel
-    PleasantLawyer.convert(id).join("_").to_sym
+    WebsocketRails[to_param]
+  end
+
+  def self.channel
+    WebSocketRails[:_games]
   end
 end

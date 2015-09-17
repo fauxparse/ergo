@@ -1,0 +1,109 @@
+$own-hand-size: 12rem;
+$other-hand-size: 8rem;
+$badge-size: 16em;
+
+.playing-area {
+  @include position(fixed, 0rem 0rem 0rem 0rem);
+
+  .player {
+    position: absolute;
+    font-size: 0.75em;
+  }
+
+  .player:nth-child(1) {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $own-hand-size;
+    font-size: 100%;
+
+    .badge {
+      left: 50%;
+      bottom: 0.5em;
+
+      .name {
+        font-weight: $bold-font-weight;
+      }
+    }
+  }
+
+  .player:nth-child(2) {
+    top: $other-hand-size;
+    bottom: $own-hand-size;
+    left: 0;
+    width: $other-hand-size;
+
+    .badge {
+      bottom: 50%;
+      left: 0.5rem;
+      @include transform(rotate(90deg));
+      @include transform-origin(50% 100%);
+    }
+  }
+
+  .player:nth-child(3),
+  &[data-number-of-players="2"] .player:nth-child(2) {
+    top: 0;
+    left: $other-hand-size;
+    right: $other-hand-size;
+    height: $other-hand-size;
+    width: auto;
+
+    .badge {
+      left: 50%;
+      top: 0.5rem;
+      @include transform(none);
+    }
+  }
+
+  .player:nth-child(4) {
+    top: $other-hand-size;
+    bottom: $own-hand-size;
+    right: 0;
+    width: $other-hand-size;
+
+    .badge {
+      bottom: 50%;
+      right: 0.5rem;
+      @include transform(rotate(-90deg));
+      @include transform-origin(50% 100%);
+    }
+  }
+}
+
+.badge {
+  position: absolute;
+  @include display(flex);
+  height: 2.5em;
+  padding: 0.25em;
+  border-radius: 1.25em;
+  background: $light-gray;
+  width: $badge-size;
+  margin: 0 $badge-size/-2;
+
+  img {
+    display: block;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+  }
+
+  .name {
+    @include ellipsis;
+    @include flex(1);
+    display: block;
+    line-height: 2em;
+    vertical-align: middle;
+    margin: 0 0.5em;
+  }
+
+  .icon {
+    background: white;
+    border-radius: 50%;
+    padding: 0.25em;
+
+    .material-icons {
+      font-size: 1.5em;
+    }
+  }
+}

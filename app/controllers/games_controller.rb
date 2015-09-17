@@ -9,6 +9,10 @@ class GamesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @game }
+    end
   end
 
   def create

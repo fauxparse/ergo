@@ -1,4 +1,4 @@
-class Ergo.GameListController
+class Ergo.GameListComponent
   controller: =>
     @games = m.prop([])
     @channel = Ergo.dispatcher.subscribe("_games")
@@ -48,4 +48,4 @@ class Ergo.GameListController
     ])
 
 $ ->
-  $(".game-list").each -> m.module(this, new Ergo.GameListController)
+  $(".game-list").each -> m.mount(this, new Ergo.GameListComponent)

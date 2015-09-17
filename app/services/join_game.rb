@@ -27,11 +27,11 @@ class JoinGame
 
   def signal_game_updated
     game_data = ActiveModel::SerializableResource.new(@game).as_json
-    WebsocketRails[:_games].trigger(:update, game_data)
+    Game.channel.trigger(:update, game_data)
   end
 
   def signal_joined_game
     player_data = ActiveModel::SerializableResource.new(@player).as_json
-    WebsocketRails[@game.channel].trigger(:joined, player_data)
+    @game.channel.trigger(:joined, player_data)
   end
 end

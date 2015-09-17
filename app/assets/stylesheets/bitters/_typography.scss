@@ -5,6 +5,7 @@ body {
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
+  font-weight: $base-font-weight;
 }
 
 h1,
@@ -22,6 +23,7 @@ h6 {
 h1 {
   font-size: 2rem;
   font-weight: 100;
+  margin: 0 0 1rem;
 }
 
 p {

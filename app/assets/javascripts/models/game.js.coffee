@@ -14,3 +14,7 @@ class Ergo.Game
     if players?
       @_players = (new Ergo.Player(player) for player in players)
     @_players ||= []
+
+  ready: ->
+    return false for player in @players() when !player.ready()
+    true

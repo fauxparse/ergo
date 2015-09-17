@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :games do
     resources :players
+    resource :player, only: [:show, :update]
   end
 
   get "/auth/google/callback" => "sessions#create"
