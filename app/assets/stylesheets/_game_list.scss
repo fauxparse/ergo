@@ -13,7 +13,7 @@
 
     &::before {
       content: "(no open games)";
-      color: $light-gray;
+      color: disabled-color();
       display: block;
       line-height: 2rem;
       vertical-align: middle;
@@ -50,8 +50,8 @@
           width: 2rem;
           height: 2rem;
           padding: 0.125rem;
-          border: 0.125rem solid green;
-          color: green;
+          border: 0.125rem solid $green;
+          color: $green;
           border-radius: 50%;
         }
       }

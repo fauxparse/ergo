@@ -10,5 +10,9 @@ class Ergo.Components.Player
 
   view: =>
     m(".player[data-id=\"#{@player().id()}\"]",
-      m.component(new Ergo.Components.Badge, player: @player())
+      m.component(new Ergo.Components.Badge, player: @player()),
+      @game().ready() && @hand()
     )
+
+  hand: =>
+    m.component(new Ergo.Components.Hand, player: @player(), hand: @game().round().hands[@player().id()], self: false)

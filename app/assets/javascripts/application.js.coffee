@@ -9,3 +9,8 @@
 @Ergo =
   Models: {}
   Components: {}
+  SYMBOLS:
+    and: "•"
+    or: "∨"
+    not: "~"
+    then: "⊃"

@@ -6,7 +6,7 @@ class Game < ActiveRecord::Base
 
   MAX_PLAYERS = 4
 
-  scope :with_players, -> { preload(:players => :user) }
+  scope :with_players, -> { preload(players: :user) }
 
   def to_param
     PleasantLawyer.convert(id).join("-")
@@ -21,6 +21,6 @@ class Game < ActiveRecord::Base
   end
 
   def self.channel
-    WebSocketRails[:_games]
+    WebsocketRails[:_games]
   end
 end

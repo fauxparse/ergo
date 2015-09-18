@@ -3,9 +3,8 @@ class Ergo.Components.Badge
     @player = m.prop(attrs.player)
 
   view: =>
-    icon = @player().ready() && "check" || "schedule"
-    m(".badge", [
+    m(".badge.#{@player().ready() && "ready" || "waiting"}", [
       m("img[src=\"#{@player().avatar()}\"]"),
       m(".name", @player().name()),
-      m(".icon", m("i.material-icons", icon))
+      m(".icon", @player().goal())
     ])

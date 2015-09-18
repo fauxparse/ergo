@@ -1,4 +1,4 @@
-class Ergo.GameListComponent
+class Ergo.Components.GameList
   controller: =>
     @games = m.prop([])
     @channel = Ergo.dispatcher.subscribe("_games")
@@ -7,14 +7,14 @@ class Ergo.GameListComponent
     $.getJSON("/games")
       .done (data) =>
         m.computation =>
-          games = (new Ergo.Game(attrs) for attrs in data)
+          games = (new Ergo.Models.Game(attrs) for attrs in data)
           @index = {}
           @index[game.id()] = game for game in games
           @games(games)
 
   gameCreated: (attrs) =>
     m.computation =>
-      game = new Ergo.Game(attrs)
+      game = new Ergo.Models.Game(attrs)
       @index[game.id()] = game
       @games().push(game)
 
@@ -28,6 +28,7 @@ class Ergo.GameListComponent
   renderGame: (game) ->
     url = "/games/#{game.id()}"
     players = (@renderPlayer(player) for player in game.players())
+
     if players.length < 4
       players.push(
         m("li.join", [
@@ -48,4 +49,4 @@ class Ergo.GameListComponent
     ])
 
 $ ->
-  $(".game-list").each -> m.mount(this, new Ergo.GameListComponent)
+  $(".game-list").each -> m.mount(this, new Ergo.Components.GameList)

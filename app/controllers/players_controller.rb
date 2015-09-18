@@ -2,8 +2,6 @@ class PlayersController < ApplicationController
   before_action :load_game
   before_action :load_player, only: [:show, :update]
 
-  wrap_parameters :player, include: [:ready]
-
   def create
     if JoinGame.new(@game, current_user).call
       redirect_to(@game)
@@ -17,7 +15,7 @@ class PlayersController < ApplicationController
   end
 
   def update
-    UpdatePlayer.new(@game, @player, player_params).call
+    UpdatePlayerReadyStatus.new(@game, @player, params[:ready]).call
     render json: @player
   end
 
@@ -28,14 +26,11 @@ class PlayersController < ApplicationController
   end
 
   def load_player
-    @player ||= if params[:id].present?
-      @game.players.find(params[:id])
-    else
-      @game.players.detect { |player| player.user == current_user }
-    end
-  end
-
-  def player_params
-    params.require(:player).permit(:ready)
+    @player ||=
+      if params[:id].present?
+        @game.players.find(params[:id])
+      else
+        @game.players.detect { |player| player.user == current_user }
+      end
   end
 end

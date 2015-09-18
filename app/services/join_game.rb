@@ -19,7 +19,7 @@ class JoinGame
   end
 
   def join_game
-    @player = @game.players.create!(user: @user)
+    @player = @game.players.create!(user: @user, position: @game.players.count)
     signal_game_updated
     signal_joined_game
     true

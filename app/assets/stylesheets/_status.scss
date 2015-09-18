@@ -1,0 +1,19 @@
+.game-status {
+  @include position(absolute, 0rem 0rem 0rem 0rem);
+  @include display(flex);
+  @include justify-content(space-around);
+  @include align-items(center);
+  background: rgba($white, 0.5);
+  @include transition(opacity 0.5s $ease-out-cubic);
+
+  &:empty {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .message {
+    font-size: 2rem;
+    font-weight: $light-font-weight;
+    color: secondary-color();
+  }
+}

@@ -5,9 +5,12 @@ class Ergo.Components.Self
 
   view: =>
     m(".player[data-id=\"#{@player().id()}\"]",
-      m.component(new Ergo.Components.Badge, player: @player())
-      @readyButton()
+      m.component(new Ergo.Components.Badge, player: @player()),
+      @game().ready() && @hand() || @readyButton
     )
+
+  hand: =>
+    m.component(new Ergo.Components.Hand, player: @player(), hand: @game().round().hands[@player().id()], self: true)
 
   readyButton: =>
     ready = @player().ready() && "Ready" || "Not ready"

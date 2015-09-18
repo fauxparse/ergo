@@ -1,7 +1,8 @@
-class Ergo.Game
+class Ergo.Models.Game
   constructor: (attrs) ->
     @id = m.prop(attrs.id)
     @players(attrs.players)
+    @round = m.prop(attrs.round)
 
   name: =>
     @id().split("-").join(" ")
@@ -12,9 +13,10 @@ class Ergo.Game
 
   players: (players) ->
     if players?
-      @_players = (new Ergo.Player(player) for player in players)
+      @_players = (new Ergo.Models.Player(player) for player in players)
     @_players ||= []
 
   ready: ->
+    return true if @round()
     return false for player in @players() when !player.ready()
     true

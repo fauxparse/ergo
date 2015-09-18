@@ -1,0 +1,52 @@
+$card-size: 6em;
+
+.card {
+  @include flex(0 1 $card-size);
+  margin: 0.25em;
+  position: relative;
+  background: divider-color();
+  @include transform-style(preserve-3d);
+  cursor: default;
+
+  .face, .back {
+    @include position(absolute, 50% 0null null 50%);
+    margin: ($card-size / -2);
+    width: $card-size;
+    height: $card-size;
+    border-radius: 0.25em;
+    @include backface-visibility(hidden);
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+  }
+
+  .face {
+    background: $grey-100;
+    border: $base-border;
+
+    .symbol {
+      @include position(absolute, 50% null null 50%);
+      margin: ($card-size / -4);
+      width: $card-size / 2;
+      height: $card-size / 2;
+      line-height: $card-size / 2;
+      vertical-align: middle;
+      text-align: center;
+      background: $white;
+      border-radius: 50%;
+      font-weight: $bold-font-weight;
+    }
+  }
+
+  .back {
+    @include transform(rotateY(180deg));
+    background-color: $red;
+    border: 0.5em solid $white;
+  }
+
+  .player:first-child & {
+    cursor: pointer;
+  }
+
+  .player:not(:first-child) & {
+    @include transform(rotateY(180deg));
+  }
+}

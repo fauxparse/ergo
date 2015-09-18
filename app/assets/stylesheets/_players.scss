@@ -1,19 +1,27 @@
-$own-hand-size: 12rem;
+$own-hand-size: 11rem;
 $other-hand-size: 8rem;
 $badge-size: 16em;
 
 .playing-area {
   @include position(fixed, 0rem 0rem 0rem 0rem);
+  @include user-select(none);
 
   .player {
     position: absolute;
     font-size: 0.75em;
+
+    .hand {
+      @include position(absolute, 0rem 0rem 0rem 0rem);
+      @include display(flex);
+      @include justify-content(center);
+      @include align-items(center);
+    }
   }
 
   .player:nth-child(1) {
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: $other-hand-size;
+    right: $other-hand-size;
     height: $own-hand-size;
     font-size: 100%;
 
@@ -24,6 +32,20 @@ $badge-size: 16em;
       .name {
         font-weight: $bold-font-weight;
       }
+    }
+
+    .hand {
+      bottom: 3.5rem;
+    }
+
+    [rel="ready"] {
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      width: 12rem;
+      border-radius: 1.25rem;
+      text-align: center;
+      margin: 0 -6rem;
     }
   }
 
@@ -39,6 +61,11 @@ $badge-size: 16em;
       @include transform(rotate(90deg));
       @include transform-origin(50% 100%);
     }
+
+    .hand {
+      left: 3rem;
+      @include flex-direction(column);
+    }
   }
 
   .player:nth-child(3),
@@ -48,11 +75,18 @@ $badge-size: 16em;
     right: $other-hand-size;
     height: $other-hand-size;
     width: auto;
+    bottom: auto;
 
     .badge {
       left: 50%;
       top: 0.5rem;
       @include transform(none);
+    }
+
+    .hand {
+      top: 3rem;
+      left: 0;
+      @include flex-direction(row-reverse);
     }
   }
 
@@ -68,6 +102,11 @@ $badge-size: 16em;
       @include transform(rotate(-90deg));
       @include transform-origin(50% 100%);
     }
+
+    .hand {
+      right: 3rem;
+      @include flex-direction(column-reverse);
+    }
   }
 }
 
@@ -77,9 +116,10 @@ $badge-size: 16em;
   height: 2.5em;
   padding: 0.25em;
   border-radius: 1.25em;
-  background: $light-gray;
+  background: divider-color();
   width: $badge-size;
   margin: 0 $badge-size/-2;
+  @include transition(opacity 0.5s $ease-out-cubic);
 
   img {
     display: block;
@@ -100,10 +140,15 @@ $badge-size: 16em;
   .icon {
     background: white;
     border-radius: 50%;
-    padding: 0.25em;
+    width: 1.33333333em;
+    text-align: center;
+    font-weight: $bold-font-weight;
+    font-size: 1.5em;
+    line-height: 1.33333333em;
+    vertical-align: middle;
+  }
 
-    .material-icons {
-      font-size: 1.5em;
-    }
+  &.waiting {
+    opacity: 0.5;
   }
 }
